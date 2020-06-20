@@ -1439,5 +1439,3 @@ td.visible-print,th.visible-print{display:table-cell!important}
 }
 .navbar-default .badge{background-color:#fff;color:#e95420}
 .navbar-inverse .badge{background-color:#fff;color:#772953}
-@media (max-width:767px){.navbar .dropdown-menu a{color:#fff}
-}
