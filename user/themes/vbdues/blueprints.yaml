@@ -1,0 +1,35 @@
+name: VBDUES
+version: 1.0.0
+description: "Theme für VBDUES basiert auf Bootstrap 3.3.6"
+icon: empire
+author:
+  name: rbannack
+  email: bannack@gmail.com
+  url: http://www.dresden-russisch.de
+homepage: https://www.beeidigte-dolmetscher.de
+demo: 
+keywords: 
+bugs: 
+license: CC
+
+form:
+  validation: loose
+  fields:
+    default_lang:
+      type: text
+      size: x-small
+      label: Default lang
+      default: 'de'
+      validate:
+        type: text
+
+    dropdown.enabled:
+        type: toggle
+        label: Dropdown in navbar
+        highlight: 1
+        default: 1
+        options:
+          1: Enabled
+          0: Disabled
+        validate:
+          type: bool

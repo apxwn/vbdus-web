@@ -1,0 +1,60 @@
+<div class="well">
+<section class="row">
+    <div class="col-md-2 col-xs-4 col-sm-3">
+
+    {% if page.media.images %}
+
+            {% set imageurl = page.media.images|first.cropZoom(120,120).url %}
+    {% elseif page.header.weiblich %}
+            {% set imageurl = url('theme://images/frau120.png') %}
+    {% elseif page.header.dolmetscher or page.header.uebersetzer %}
+            {% set imageurl = url('theme://images/mann120.png') %}
+    {% else %}
+            {% set imageurl = url('theme://images/logo120.png') %}
+
+    {% endif %}
+
+            <a href="{{ page.url }}"><img src="{{ imageurl }}" class="img-responsive img-rounded"></a>
+    </div>
+
+
+    <div class="col-md-10 col-xs-8 col-sm-9">
+        <div class="search-title">
+            <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+        </div>
+
+        {% if page.header.dolmetscher or page.header.uebersetzer %}
+
+        <p>{% if page.header.weiblich %}
+        {% if page.header.uebersetzer and not page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_W'|t }}
+        {% elseif not page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.DO_W'|t }}
+        {% elseif page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_DO_W'|t }}
+        {% endif %}
+      {% else %}
+        {% if page.header.uebersetzer and not page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_M'|t }}
+        {% elseif not page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.DO_M'|t }}
+        {% elseif page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_DO_M'|t }}
+        {% endif %}
+      {% endif %}
+      <br /><strong>
+      {% for sprache in page.taxonomy.codes %}{% if loop.last and not loop.first %}</strong> {{ 'MITGLIEDER.UND'|t }} <strong>{% elseif not loop.last and not loop.first %}</strong>, <strong>{% endif %}{{ sprachen(sprache,grav.language.getActive)|capitalize }}</strong>{% endfor %}
+      </p>
+        <a href="{{ page.url }}" class="btn btn-primary">{{ 'SUCHBOX.PROFIL'|t }}</a>
+        {% else %}
+        <div class="search-details">
+        <span class="search-date">{{ page.date|date('d') }}. {{ 'GRAV.MONTHS_OF_THE_YEAR'|ta(page.date|date('n') - 1) }} {{ page.date|date('Y') }}</span>
+        </div> 
+        <p>{{ page.summary }}</p>
+        <a href="{{ page.url }}" class="btn btn-success">{{ 'SUCHBOX.ANZEIGEN'|t }}...</a>
+
+        {% endif %}
+
+    </div>
+</section>
+</div>

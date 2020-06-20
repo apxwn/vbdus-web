@@ -1,0 +1,41 @@
+<div class="well">
+<section class="row">
+    <div class="col-md-2 col-xs-4 col-sm-3">
+
+    {% if page.media.images %}
+
+            {% set imageurl = page.media.images|first.cropZoom(120,120).url %}
+    {% elseif page.header.weiblich %}
+            {% set imageurl = url('theme://images/frau120.png') %}
+    {% elseif page.header.dolmetscher or page.header.uebersetzer %}
+            {% set imageurl = url('theme://images/mann120.png') %}
+    {% else %}
+            {% set imageurl = url('theme://images/logo120.png') %}
+
+    {% endif %}
+
+            <a href="{{ page.url }}"><img src="{{ imageurl }}" class="img-responsive img-rounded"></a>
+    </div>
+
+
+    <div class="col-md-10 col-xs-8 col-sm-9">
+        <div class="search-title">
+            <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+        </div>
+
+        {% if page.header.dolmetscher or page.header.uebersetzer %}
+
+        <p>beeidigte{% if not page.header.weiblich %}r{% endif %} {% if page.header.dolmetscher %}Dolmetscher{% if page.header.weiblich %}in{% endif %} und {% endif %}Übersetzer{% if page.header.weiblich %}in{% endif %} für {% for sprache in page.taxonomy.tag %}{% if loop.last and not loop.first %} und {% elseif not loop.last and not loop.first %}, {% endif %}{{ sprache|capitalize }}{% endfor %}</p>
+
+        <a href="{{ page.url }}" class="btn btn-primary">Profil</a>
+
+        {% else %}
+        <span class="search-date">{{ page.date|date('d') }}. {{ 'MONTHS_OF_THE_YEAR'|ta(page.date|date('n') - 1) }} {{ page.date|date('Y') }}</span>
+        <p>{{ page.summary }}</p>
+        <a href="{{ page.url }}" class="btn btn-success">Weiterlesen...</a>
+
+        {% endif %}
+
+    </div>
+</section>
+</div>

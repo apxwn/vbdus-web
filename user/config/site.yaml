@@ -1,0 +1,24 @@
+title: 'Verein Beeidigter Dolmetscher und Übersetzer Sachsen e.V.'
+default_lang: de-DE
+author:
+  name: 'Roman Bannack'
+  email: r.bannack@beeidigte-dolmetscher.de
+taxonomies:
+  - category
+  - tag
+  - verein
+  - codes
+metadata:
+  description: 'Allgemein beeidigte und öffentlich bestellte Dolmetscher und Übersetzer in Sachsen'
+  geo.region: Sachsen
+  geo.placename: Dresden
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+redirects:
+  /index.php/de/links-und-weiterfuehrendes: /impressum
+routes: null
+blog:
+  route: /blog

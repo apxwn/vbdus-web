@@ -1,0 +1,19 @@
+name: Mrusek
+generell: nein
+allesok: nein
+gender: mann
+titel: null
+sprachen: null
+beeidigung: {"beeidigung-option1":"option1","beeidigung-option2":"option2"}
+adresse: null
+festnetz: null
+mobiltelefon: null
+fax: null
+email: null
+webseite: null
+schwerpunkt1: null
+schwerpunkt2: null
+schwerpunkt3: null
+bild: []
+kommentar: null
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive() }}">
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if header.description %}
+        <meta name="description" content="{{ header.description }}">
+        {% else %}
+        <meta name="description" content="{{ site.metadata.description }}">
+        {% endif %}
+        {% if header.robots %}
+        <meta name="robots" content="{{ header.robots }}">
+        {% endif %}
+        {% include 'partials/langswitcher.hreflang.html.twig' %}
+        
+        <link rel="icon" type="image/png" href="{{ theme_url }}/images/favicon.png">
+
+        <title>{% if header.title %}{{ header.title }} | {% endif %}{{ site.title }}</title>
+
+        {% block stylesheets %}
+            {# Bootstrap core CSS #}
+            {% do assets.add('theme://css/bootstrap.min.css',101) %}
+
+        {# Custom styles for this theme #}
+            {% do assets.add('theme://css/bootstrap-custom.css',100) %}
+
+            {{ assets.css() }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% do assets.add('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', 101) %}
+            {% do assets.add('theme://js/bootstrap.min.js') %}
+
+            {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
+                {% do assets.add('https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js') %}
+                {% do assets.add('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') %}
+            {% endif %}
+
+            {{ assets.js() }}
+        {% endblock %}
+
+        {% endblock head %}
+    </head>
+
+      <body data-spy="scroll" data-target=".scrollspy">
+
+        {% include 'partials/navi.html.twig' %}
+ 
+        {% block header %}{% endblock %}
+
+        {% block content %}{% endblock %}
+        
+{#        <div class="footer">	#}
+{#            <div class="container">	#}
+{#                <p class="text-muted">{{ 'SYSTEM.MACHER_TXT'|t }}: <a href="{{ 'SYSTEM.MACHER_URL'|t }}">{{ 'SYSTEM.MACHER'|t }}</a> {{ 'SYSTEM.MACHER_UND'|t }} <a href="http://getgrav.org">Grav</a></p>	#}
+{#            </div>	#}
+{#        </div>	#}
+    </body>
+    {% block bottom %} {{ assets.js('bottom') }} {% endblock %}
+
+    <span id="top-link-block" class="hidden">
+    <a href="#top" id="backToTopBtn" class="well well-sm well-toplink">
+        <i class="glyphicon glyphicon-chevron-up"></i>{{ 'SYSTEM.NACH_OBEN'|t }}
+    </a>
+    </span>
+
+<script>
+if ( ($(window).height() + 100) < $(document).height() ) {
+    $('#top-link-block').removeClass('hidden').affix({
+        offset: {top:100}
+    });
+}
+</script>
+<script>
+$('#backToTopBtn').click(function(){
+        $('html,body').animate({scrollTop:0},'slow');return false;
+    });
+</script>
+</html>

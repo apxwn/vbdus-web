@@ -1,0 +1,11 @@
+state: enabled
+email: r.bannack@beeidigte-dolmetscher.de
+fullname: 'Roman Bannack'
+title: Administrator
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$BkEZg/hCewgCnTRQtCIZS.Zv4A5BycPV6kwLHUOimipt/oFyFijuS

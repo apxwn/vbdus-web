@@ -1,0 +1,7 @@
+/user/pages/*mitglieder/*/perso*.md
+/cache/*
+/images/*
+/backup/*
+/assets/ *
+*.kate-swp
+/tmp/*

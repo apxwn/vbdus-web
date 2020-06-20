@@ -1,0 +1,40 @@
+{% embed 'partials/base.html.twig' %}
+
+     {% set collection = page.collection %}
+
+    {% block content %}
+
+        {% set blog_image = page.media.images|first %}
+
+        <div class="container">
+
+        {% if blog_image %}
+        <div class="jumbotron" style="background-image: url({{ blog_image.url }}); background-size: contain; background-repeat: no-repeat; background-position: right top;"> 
+        {% else %}
+        <div class="jumbotron">
+        {% endif %}
+            {{ page.content }}
+        </div>
+
+        </div>
+
+        <div class="container-fluid">
+            <div id="listing" class="row">
+                {% for child in collection %}
+                    {% include 'partials/blog_item.html.twig' with {'blog':page, 'page':child, 'truncate':true} %}
+
+                {% endfor %}
+
+                {% if config.plugins.pagination.enabled and collection.params.pagination %}
+                    {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+                {% endif %}
+            </div>
+        </div>
+
+{# sidebar include #}
+
+        </div>
+    {% endblock %}
+
+
+{% endembed %}

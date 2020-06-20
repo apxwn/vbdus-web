@@ -1,0 +1,13 @@
+name: Sprachen
+version: 1.1
+description: "TwigExtension sprachen(Sprachcode, Sprachcode_Zielsprache): Hiermit kann der Name einer Sprache in einer anderen Sprache dargestellt werden. Aufruf aus Twig: {{ sprachen(Sprachcode,Sprachcode_Zielsprache) }}, z.B.: {{ sprachen('de','ru')|capitalize }}.
+TwigExtension accentsort (Array, Sprachcode) sortiert den Array so, wie es in der Sprache, die mit Sprachcode bezeichnet wird, geschehen würde, also z.B. unter richtiger Einordnung der Vokale mit diakritischen Zeichen usw. Aufruf aus Twig: {% set array = accentsort(array, 'hu') %}, z.B. {% set array_alphabetisch = accentsort(array,grav.language.getActive) %}, usw."
+icon: tag
+author:
+  name: Roman Bannack
+  email: r.bannack@beeidigte-dolmetscher.de
+  url: http://dresden-russisch.de
+homepage: https://www.beeidigte-dolmetscher.de
+demo:
+keywords: sprachen, languages, native, i18n, sprachcode
+license: MIT

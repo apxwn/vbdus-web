@@ -1,0 +1,21 @@
+enabled: true
+output-sd: true
+output-og: false
+output-twitter: false
+output-linkedin: false
+org-name: 'Verein Beeidigter Dolmetscher und Übersetzer Sachsen e.V.'
+org-url: 'https://beeidigte-dolmetscher.de'
+org-facebook-url: null
+org-facebook-appid: null
+org-twitter-user: null
+org-instagram-url: null
+org-linkedin-url: null
+org-pinterest-url: null
+org-youtube-url: null
+org-wikipedia-url: null
+org-logo:
+  user/plugins/aura/assets/vbdus-single_HL_CO_OW.png:
+    name: vbdus-single_HL_CO_OW.png
+    type: image/png
+    size: 118490
+    path: user/plugins/aura/assets/vbdus-single_HL_CO_OW.png

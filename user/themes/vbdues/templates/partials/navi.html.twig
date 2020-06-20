@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header dropdown">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ base_url_absolute }}"><img src="{{ url('theme://images/logow24.png') }}" alt="Verein Beeidigter Dolmetscher und Übersetzer Sachsen Homepage" title="{{ 'SYSTEM.HOMEPAGE'|t }}"></a>
+			<a class="dropdown-toggle navbar-brand" type="button" id="SprachenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="navbar-brand" style="cursor: pointer; text-decoration : none;"><img src="{{ url('theme://images/langswitcher.png') }}" alt="{{ 'SYSTEM.SPRACHUMSCHALTER'|t }}" title="{{ 'SYSTEM.SPRACHUMSCHALTER'|t }}"></a>
+			<ul class="dropdown-menu" aria-labelledby="SprachenDropdown">
+			{% for language in langswitcher.languages %}
+
+				{% set show_language = true %}
+				{% if language == langswitcher.current %}
+					{% set lang_url = page.url %}
+					{% set active_class = ' active' %}
+				{% else %}
+					{% set base_lang_url = base_url_simple ~ grav.language.getLanguageURLPrefix(language) %}
+					{% set lang_url = base_lang_url ~ langswitcher.page_route ~ page.urlExtension %}
+					{% set untranslated_pages_behavior = grav.config.plugins.langswitcher.untranslated_pages_behavior %}
+					{% if untranslated_pages_behavior != 'none' %}
+						{% set translated_page = langswitcher.translated_pages[language] %}
+						{% if (not translated_page) or (not translated_page.published) %}
+							{% if untranslated_pages_behavior == 'redirect' %}
+								{% set lang_url = base_lang_url ~ '/' %}
+							{% elseif untranslated_pages_behavior == 'hide' %}
+								{% set show_language = false %}
+							{% endif %}
+						{% endif %}
+					{% endif %}
+					{% set active_class = '' %}
+				{% endif %}
+
+				{% if show_language %}
+					<li class="external{{ active_class }}"><a href="{{ lang_url ~ uri.params }}">{{ native_name(language)|capitalize }}</a></li>
+				{% endif %}
+
+			{% endfor %}
+			</ul> 
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% for page in pages.children %}
+                {% if page.visible %}
+                {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
+                <li class="{{ current_page }}"><a href="{{ page.url }}">{{ page.menu }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

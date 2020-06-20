@@ -1,0 +1,12 @@
+enabled: true
+custom: false
+position: bottom
+compliance: info
+palette: black
+layout: edgeless
+informations: /impressum
+banner_message: null
+banner_dismiss: null
+banner_accept: null
+banner_policy: null
+custom_config: null

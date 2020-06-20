@@ -1,0 +1,8 @@
+enabled: true
+route: /sitemap
+changefreq: daily
+priority: !!float 1
+ignores:
+  - /data
+  - /data/thankyou2
+  - /kontakt/thankyou

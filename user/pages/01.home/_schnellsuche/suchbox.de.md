@@ -1,0 +1,5 @@
+---
+title: Schnellsuche
+---
+
+Suchbox body

@@ -1,0 +1,83 @@
+{% embed 'partials/base.html.twig' %}
+
+	{% block content %}
+
+{% embed 'partials/header-klein.html.twig' %}{% endembed %}
+		
+<div class="container">
+    <div class="row">
+      <div class="page-header">
+      <h1 class="h2" style="text-align: left;">{% if page.header.titel %}{{ page.header.titel }} {% endif %}{{ page.header.vorname }} {{ page.header.name }}<br /><small>
+      {% if page.header.weiblich %}
+        {% if page.header.uebersetzer and not page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_W'|t }}
+        {% elseif not page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.DO_W'|t }}
+        {% elseif page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_DO_W'|t }}
+        {% endif %}
+      {% else %}
+        {% if page.header.uebersetzer and not page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_M'|t }}
+        {% elseif not page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.DO_M'|t }}
+        {% elseif page.header.uebersetzer and page.header.dolmetscher %}
+        {{ 'MITGLIEDER.UE_DO_M'|t }}
+        {% endif %}
+      {% endif %}
+      </small></h1>
+      </div>
+    </div>
+    <div class="row">
+    	<div class="col-xs-12 col-sm-12 col-md-12">
+    	<span class="bold">
+      {% if page.taxonomy.codes|length > 1 %}
+        {{ 'PERSON.SPRACHE_N'|t }}
+      {% else %}
+        {{ 'PERSON.SPRACHE_1'|t }}
+      {% endif %}
+      </span> {% for sprache in page.taxonomy.codes %}<strong><span class="h3"><a href="{{ base_url }}/mitglieder/codes:{{ sprache }}">{{ sprachen(sprache, grav.language.getActive)|capitalize }}</a></span></strong>{% if not loop.last %}, {% endif %}{% endfor %}
+    	</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+      <h4 class="h4">{{ 'PERSON.KONTAKT'|t }}</h4>
+      <address>
+      {{ page.header.anschrift1 }}<br />{% if page.header.anschrift2 %}{{ page.header.anschrift2 }}<br />{% endif %}{{ page.header.plz }} {{ page.header.ort }}<br /><br />
+      {% if page.header.telefon %}<abbr title="{{ 'MITGLIEDER.TEL'|t }}"><i class="glyphicon glyphicon-earphone"></i></abbr> {{ page.header.telefon }}<br />{% endif %}
+      {% if page.header.telefon_mobil %}<abbr title="{{ 'MITGLIEDER.MOB'|t }}"><i class="glyphicon glyphicon-phone"></i></abbr> {{ page.header.telefon_mobil }}<br />{% endif %}
+      {% if page.header.fax %}<abbr title="{{ 'MITGLIEDER.FAX'|t }}"><i class="glyphicon glyphicon-list-alt"></i></abbr> {{ page.header.fax }}<br />{% endif %}
+      </address>
+      {% if page.header.email or page.header.webseite %}<address>
+      {{ 'MITGLIEDER.EML'|t }}: <a href="mailto:{{ page.header.email|safe_email }}">{{ page.header.email|safe_email }}</a><br />
+      {% if page.header.webseite %}{{ 'PERSON.WEBSEITE'|t }}: <a href="{% if page.header.webseite starts with 'http://' %}{{ page.header.webseite }}{% else %}http://{{ page.header.webseite }}{% endif %}">{{ page.header.webseite|trim('http:/') }}</a>{% endif %}
+      </address>{% endif %}
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-4">
+      	{% if page.header.schwerpunkte1 %}
+      	<h4 class="h4">{{ 'PERSON.SCHWERPUNKTE'|t }}</h4>
+      	<ul>
+      		<li>{{ page.header.schwerpunkte1 }}</li>
+      		{% if page.header.schwerpunkte2 %}<li>{{ page.header.schwerpunkte2 }}</li>{% endif %}
+      		{% if page.header.schwerpunkte3 %}<li>{{ page.header.schwerpunkte3 }}</li>{% endif %}
+      	</ul>
+      	{% endif %}
+      </div>
+      <div class="col-xs-6 col-md-4">
+      {% if page.media.images %}
+		{% set imageurl = page.media.images|first.cropZoom(240,240).url %}
+	  {% elseif not page.header.weiblich %}
+	    {% set imageurl = url('theme://images/mann.png') %}
+	  {% else %}
+	    {% set imageurl = url('theme://images/frau.png') %}
+	  {% endif %}
+        <img src="{{ imageurl }}" class="img-responsive img-rounded center-block" alt="{{ page.header.vorname}} {{ page.header.name }}" title="{{ page.header.vorname}} {{ page.header.name }}">
+      </div>
+	</div>
+	<div class="row"><hr></div>
+	<button type="button" class="btn btn-primary noprint" title="{{ 'PERSON.DRUCKEN'|t }}" onclick="window.print();return false;"><span class="glyphicon glyphicon-print"></span></a>
+</div>
+
+	{% endblock %}
+
+{% endembed %}

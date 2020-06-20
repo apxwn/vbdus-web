@@ -1,0 +1,147 @@
+{% embed 'partials/base.html.twig' %}
+{% block header %}
+{% include 'partials/header-klein.html.twig' %}
+{% endblock %}
+
+{% block content %}
+{% set collection = page.collection.shuffle() %}
+
+<div class="container">
+
+            {{ page.content }}
+
+<hr>
+{% set activeTax = uri.param('codes') %}
+{% if activeTax %}
+	<h5 class="h4">{{ 'MITGLIEDER.UEBERSCHRIFT_GEFILTERT'|t }} {{ sprachen(activeTax,grav.language.getActive)|capitalize }}<a class="btn btn-primary pull-right" href="{{ base_url }}/mitglieder/">{{ 'MITGLIEDER.BUTTON_ALLE_2'|t }}</a></h5>
+{% else %}
+	<h5 class="h4">{{ 'MITGLIEDER.FILTER_MSG'|t }}</h5>
+	{% set taxlist = taxonomylist.get() %}
+
+	<div class="btn-toolbar" role="toolbar">
+	<div class="buttons btn-group">
+			<input type="button" class="btn btn-primary" value="Alle" id="alle">
+
+	{% if taxlist %}
+		{% set sprachliste = [] %}
+		{% for tax, value in taxlist['codes'] %}
+			{% set sprachliste = sprachliste|merge([sprachen(tax, grav.language.getActive)]) %}
+		{% endfor %}
+		{% set sprachliste = accentsort(sprachliste, grav.language.getActive) %}
+		{% for tax in sprachliste %}
+			<input type="button" class="btn sprachbutton" role="button" data-tabid="{{ tax }}" value="{{ tax|capitalize }}">
+		{% endfor %}
+	</div>
+	{% endif %}
+	</div>
+{% endif %}
+<hr>
+
+	<div class="row" style="overflow: auto;" id="listing">
+
+		{% for child in collection %}
+
+		<div class="col-xs-12 col-sm-6 col-md-4">
+		<div class="umschlag">
+			<div class="well" style="height: 280px; overflow: hidden;" data-blockid="{% for sprachid in child.taxonomy.codes %}{{ sprachen(sprachid,grav.language.getActive) }}{% endfor %}">
+			{% if child.media.images %}
+			{% set imageurl = child.media.images|first.cropZoom(64,64).url %}
+	  		{% elseif not child.header.weiblich %}
+	    	{% set imageurl = url('theme://images/mann64.png') %}
+	  		{% else %}
+	    	{% set imageurl = url('theme://images/frau64.png') %}
+	  		{% endif %}
+			<a href="{{ child.url }}"><img style="float: left; margin: 0px 12px 12px 0px;" src="{{ imageurl }}" class="img-responsive img-rounded center-block" alt="{{ child.header.vorname }} {{ child.header.name }}"></a>
+			
+			<div style="float: right; width: 66%;">
+			<h2 class="h4" style="margin-top: 0px;"><a href="{{ child.url }}">{{ child.header.vorname }} {{ child.header.name }}</a></h2>
+			<small>
+			{% if child.header.weiblich %}
+			  {% if child.header.uebersetzer and not child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.UE_W'|t }}
+			  {% elseif not child.header.uebersetzer and child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.DO_W'|t }}
+			  {% elseif child.header.uebersetzer and child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.UE_DO_W'|t }}
+			  {% endif %}
+			{% else %}
+			  {% if child.header.uebersetzer and not child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.UE_M'|t }}
+			  {% elseif not child.header.uebersetzer and child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.DO_M'|t }}
+			  {% elseif child.header.uebersetzer and child.header.dolmetscher %}
+			  {{ 'MITGLIEDER.UE_DO_M'|t }}
+			  {% endif %}
+			{% endif %}
+			<br />
+			  <strong>{% for sprache in child.taxonomy.codes %}{% if loop.last and not loop.first %}</strong> {{ 'MITGLIEDER.UND'|t }} <strong>{% elseif not loop.last and not loop.first %}</strong>, <strong>{% endif %}{{ sprachen(sprache,grav.language.getActive)|capitalize }}</strong>{% endfor %}
+			
+			</small><br><br></div>
+
+			<div style="float: right; width: 100%;">
+			<address>
+		      {% if child.header.telefon %}<abbr title="{{ 'MITGLIEDER.TEL'|t }}"><i class="glyphicon glyphicon-earphone"></i></abbr> {{ child.header.telefon }}<br />{% endif %}
+		      {% if child.header.telefon_mobil %}<abbr title="{{ 'MITGLIEDER.MOB'|t }}"><i class="glyphicon glyphicon-phone"></i></abbr> {{ child.header.telefon_mobil }}<br />{% endif %}
+		    </address>
+		      {% if child.header.email or child.header.webseite %}<address>
+		      <abbr title="{{ 'MITGLIEDER.EMLA'|t }}"><i class="glyphicon glyphicon-envelope"></i></abbr> <a href="mailto:{{ child.header.email|safe_email }}">
+		      
+		      {% if child.header.email|length > 24 %}
+		      {{ child.header.email|slice(0,24) }}...
+		      {% else %}
+		      {{ child.header.email|safe_email }}
+		      {% endif %}
+		      </a><br />
+		      {% if child.header.webseite %}<abbr title="{{ 'PERSON.WEBSEITE'|t }}"><i class="glyphicon glyphicon-globe"></i></abbr> <a href="{% if child.header.webseite starts with 'http://' %}{{ child.header.webseite }}{% else %}http://{{ child.header.webseite }}{% endif %}">
+		      
+		      {% if child.header.webseite|length > 24 %}
+		      {{ child.header.webseite|trim('http://')|slice(0,24) }}...
+		      {% else %}
+		      {{ child.header.webseite|trim('http://') }}
+		      {% endif %}
+		      </a>{% endif %}
+		      </address>{% endif %}
+
+			</div>
+
+			</div>
+		</div>
+		</div>
+
+		{% endfor %}
+
+
+
+
+
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$('.sprachbutton').click(function(){
+  	var tabID = $(this).data('tabid');
+    
+    $('.buttons').children().removeClass('btn-custom');
+    
+    $(this).addClass('btn-custom');
+    
+    $('.umschlag').children().addClass("ausgemacht");
+    $('.umschlag').find("[data-blockid*="+tabID+"]").removeClass("ausgemacht");
+    $('html, body').animate({
+    scrollTop: $('[data-blockid*='+tabID+']:visible:first').offset().top -128
+}, 1000);
+  });
+});
+	$('#alle').click(function(){
+	$('.buttons').children().removeClass('btn-custom');	
+	$(this).addClass('btn-custom');
+	$('.umschlag').children().removeClass("ausgemacht");
+  });
+</script>
+
+{# Zum Script: die Klasse ".sprachbutton" muss (soll) nicht im CSS definiert sein. Sie dient nur der Identifikation der Sprachbuttons durch das Skript. #}
+
+    {% endblock %}
+
+{% endembed %}

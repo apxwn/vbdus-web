@@ -1,0 +1,30 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+{% set schildurl = url('theme://images/Ortsausgang.svg') %}
+
+<div class="container">
+	<div style="background-image: url('{{ schildurl }}'); background-size: 100% 100%; height: 20vw; width: 100%; background-repeat: no-repeat; background-position: center; position: relative;">
+	
+	<div style="height: 80%; width: 80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -25%); text-align: center;">
+
+	<span class="h4" style="font-size: 16px; font-size: 1vw;">{{ 'SYSTEM.VEREIN_OHNE'|t }}</span><br>
+	<span class="h1" style="font-size: 64px; font-size: 5.4vw;">{{ 'SYSTEM.VEREIN_SA'|t }}</span><br>
+	<span class="h4" style="font-size: 16px; font-size: 1vw;">{{ 'SYSTEM.VEREIN_EV'|t }}</span>
+	
+	
+	</div>
+
+	</div>
+	<hr>
+
+{{ page.content }}
+
+     <div class="well well-lg">
+     <h2 style="text-align: center; font-size: 16px;">{{ 'PLUGINS.ERROR.ERROR'|t }}</h2>
+     <h1 style="text-align: center; font-size: 6vw;">{{ header.http_response_code }}</h1>
+     <h3 style="text-align: center; font-size: 16px;">{{ 'PLUGINS.ERROR.ERROR_MESSAGE'|t }}</h3>
+     </div>
+     </div>
+{% endblock %}

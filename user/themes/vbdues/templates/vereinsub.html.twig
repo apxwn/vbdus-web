@@ -1,0 +1,42 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+{% include 'partials/header-klein.html.twig' %}
+
+<div class="container">
+<hr>
+<div class="row">
+<div class="col-md-3">
+
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title">Verein</h3></div>
+<div class="list-group">{% for subseite in taxonomy.findtaxonomy({'verein':'verein'}) %}
+<a href="{{ subseite.url }}" class="list-group-item">{{ subseite.title }}{% if subseite.active or subseite.activeChild %}<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>{% endif %}</a>
+{% endfor %}
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title">Zusammenarbeit</h3></div>
+<div class="list-group">{% for subseite in taxonomy.findtaxonomy({'verein':'zusammenarbeit'}) %}
+<a href="{{ subseite.url }}" class="list-group-item">{{ subseite.title }}{% if subseite.active or subseite.activeChild %}<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>{% endif %}</a>
+{% endfor %}
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title">Vereinsorganisation</h3></div>
+<div class="list-group">{% for subseite in taxonomy.findtaxonomy({'verein':'vereinsorganisation'}) %}
+<a href="{{ subseite.url }}" class="list-group-item">{{ subseite.title }}{% if subseite.active or subseite.activeChild %}<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>{% endif %}</a>
+{% endfor %}
+</div>
+</div>
+</div>
+
+<div class="col-md-9">
+{{ page.content }}
+</div>
+</div>
+</div>
+{% endblock %}

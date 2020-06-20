@@ -1,0 +1,77 @@
+{% extends 'partials/base.html.twig' %}
+{% block header %}
+{% include 'partials/header-klein.html.twig' %}
+{% endblock header %}
+
+{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+
+{% block content %}
+<hr>
+<div class="container">
+<div class="row">
+
+<div class="col-md-3 scrollspy">
+    <ul id="nav" class="nav hidden-xs hidden-sm" data-spy="affix">
+
+	{% for module in page.children.modular %}
+	
+    {% if module.header.zwischenueberschrift %}
+    
+    <li><a href="#{{ module.slug }}" style="font-weight: 700;">{{ module.title|upper }}</a></li>
+    
+    {% else %}
+    
+    <li><a href="#{{ module.slug }}">{{ module.title }}</a></li>
+    
+    {% endif %}
+    
+    {% endfor %}
+
+    </ul>
+</div>
+
+<div class="col-md-9">
+{{ page.content }}
+	{% for module in page.collection() %}
+    {% if module.header.zwischenueberschrift %}
+    <section id="{{ module.slug }}">
+    {% endif %}
+        {% if not module.header.zwischenueberschrift %}
+        <section id="{{ module.slug }}">
+        {{ module.content }}
+        </section>
+        {% else %}
+        <h1>{{ module.title|upper }}</h1>
+        {% endif %}
+    {% if module.header.zwischenueberschrift %}</section>{% endif %}
+    {% endfor %}
+</div>
+
+</div>
+</div>
+
+<script>
+$('#nav').affix({
+    offset: {     
+      top: $('#kopf').outerHeight(true),
+      bottom: ($('footer').outerHeight(true) + $('.application').outerHeight(true)) + 40
+    }
+});
+</script>
+<script>
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+{% endblock %} 

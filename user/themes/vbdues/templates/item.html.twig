@@ -1,0 +1,73 @@
+{% embed 'partials/base.html.twig' %}
+
+	{% block content %}
+		
+		<div class="container">
+
+		<div class="row">
+			<div id="item">
+
+<div class="well well-sm">
+    {% set header_image = page.header.header_image|defined(true) %}
+    {% set header_image_file = page.header.header_image_file %}
+
+
+    <div class="page-header">
+        
+        {% if page.header.taxonomy.category == "aktuell" %}
+        <span class="h4">
+            <span class="label label-info">{{ page.date|date("d.m.Y") }}</span>
+        </span>
+        {% endif %}
+
+        <h1 style="text-align: left;">{{ page.title }}
+
+        {% if page.header.subtitle %}
+        <span class="label label-warning">{{ page.header.subtitle }}</span>
+        {% endif %}
+        </h1>
+
+        {% if header_image %}
+            {% if header_image_file %}
+                {% set header_image_media = page.media.images[header_image_file] %}
+            {% else %}
+                {% set header_image_media = page.media.images|first %}
+            {% endif %}
+            {{ header_image_media.cropZoom(920, 517).html( page.title, page.title, 'img-responsive') }}
+        {% endif %}
+
+    </div>
+
+    {% if page.header.continue_link is sameas(false) %}
+        <p>{{ page.content }}</p>
+        {% if not truncate %}
+        {% endif %}
+    {% elseif truncate and page.summary != page.content %}
+        <p>{{ page.summary }}</p>
+        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+    {% elseif truncate %}
+        {% if page.summary != page.content %}
+            <p>{{ page.content|truncate(550) }}</p>
+        {% else %}
+            <p>{{ page.content }}</p>
+        {% endif %}
+        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+    {% else %}
+        <p>{{ page.content }}</p>
+        {% set show_prev_next = true %}
+    {% endif %}
+
+</div>
+
+
+			</div>
+			<div id="sidebar" class="col-xs-6 col-md-4">
+	{# 			{% include 'partials/sidebar.html.twig' with {'blog':page.parent}%} #}
+			</div>
+		</div>
+
+		</div>
+
+	{% endblock %}
+
+{% endembed %}
