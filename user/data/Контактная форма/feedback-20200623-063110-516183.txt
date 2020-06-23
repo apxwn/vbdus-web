@@ -1,0 +1,7 @@
+name: 'Dr. Renata Mantel'
+email: renata.mantel@gmail.com
+message: "Здравствуйте,\r\n\r\nСкажите, пожалуйста, можно ли вступить в Ассоциацию или сотрудничать с ней? Я письменная переводчица, работаю с казахским, русским и английским языками. Присяжность получу 15 июля в Oberlandesgericht Dresden.\r\n\r\nС уважением,\r\nРената Мантель\r\n"
+Dateianhang: []
+Telefon: null
+einverstanden: '1'
+
