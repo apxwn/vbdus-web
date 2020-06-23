@@ -10,7 +10,7 @@
             <a class="navbar-brand" href="{{ base_url_absolute }}"><img src="{{ url('theme://images/logow24.png') }}" alt="Verein Beeidigter Dolmetscher und Übersetzer Sachsen Homepage" title="{{ 'SYSTEM.HOMEPAGE'|t }}"></a>
 			<a class="dropdown-toggle navbar-brand" type="button" id="SprachenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="navbar-brand" style="cursor: pointer; text-decoration : none;"><img src="{{ url('theme://images/langswitcher.png') }}" alt="{{ 'SYSTEM.SPRACHUMSCHALTER'|t }}" title="{{ 'SYSTEM.SPRACHUMSCHALTER'|t }}"></a>
 			<ul class="dropdown-menu" aria-labelledby="SprachenDropdown">
-			{% for language in langswitcher.languages %}
+			{% for language in langswitcher.languages|sort %}
 
 				{% set show_language = true %}
 				{% if language == langswitcher.current %}
