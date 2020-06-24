@@ -26,6 +26,7 @@ languages:
     - cs
     - hu
     - pl
+    - ar
   default_lang: null
   include_default_lang: true
   pages_fallback_only: false
@@ -173,7 +174,7 @@ media:
   unsupported_inline_types: null
   allowed_fallback_types: null
   auto_metadata_exif: false
-  upload_limit: 41943040
+  upload_limit: 2097152
 session:
   enabled: true
   initialize: true
