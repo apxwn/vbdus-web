@@ -283,8 +283,13 @@ class Aura
             'url' => $this->website->url,
             'name' => $this->website->name,
             'publisher' => array(
-                '@id' => $this->org->id,
-            ),
+                '@id' => $this->org->id
+                ),
+			'potentialAction' => array(
+				'@type' => 'SearchAction',
+				'target' => $this->website->url . '/search/query:{search_term_string}',
+				'query-input' => 'required name=search_term_string'
+				)
         );
 
         $webpage = array(
@@ -411,10 +416,6 @@ class Aura
         $data = array(
             '@context' => 'https://schema.org',
             '@graph' => array(),
-            'potentialAction' => array(
-				"@type" => "SearchAction",
-				"target" => "https://beeidigte-dolmetscher.de/search/query:{search_term_string}",
-				"query-input" => "required name=search_term_string")
         );
 
         // Add the elements in order

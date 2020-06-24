@@ -62,7 +62,7 @@ de:
     SPRACHE_1: "Sprache:"
     SPRACHE_N: "Sprachen:"
     KONTAKT: "Kontakt"
-    WEBSEITE: "Webseite:"
+    WEBSEITE: "Webseite"
     SCHWERPUNKTE: "Schwerpunkte"
     DRUCKEN: "Drucken"
   KONTAKTFORMULAR:
@@ -164,7 +164,7 @@ en:
     SPRACHE_1: "Language:"
     SPRACHE_N: "Languages:"
     KONTAKT: "Contact"
-    WEBSEITE: "Website:"
+    WEBSEITE: "Website"
     SCHWERPUNKTE: "Focus fields"
     DRUCKEN: "Print"
   KONTAKTFORMULAR: 
@@ -266,7 +266,7 @@ ru:
     SPRACHE_1: "Язык:"
     SPRACHE_N: "Языки:"
     KONTAKT: "Контакт"
-    WEBSEITE: "Сайт:"
+    WEBSEITE: "Сайт"
     SCHWERPUNKTE: "Профиль"
     DRUCKEN: "Распечатать"
   KONTAKTFORMULAR: 
