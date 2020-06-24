@@ -14,8 +14,8 @@ org-pinterest-url: null
 org-youtube-url: null
 org-wikipedia-url: null
 org-logo:
-  user/plugins/aura/assets/vbdus-single_HL_CO_OW.png:
+  user/images/vbdus-single_HL_CO_OW.png:
     name: vbdus-single_HL_CO_OW.png
     type: image/png
     size: 118490
-    path: user/plugins/aura/assets/vbdus-single_HL_CO_OW.png
+    path: user/images/vbdus-single_HL_CO_OW.png
