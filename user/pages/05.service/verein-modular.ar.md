@@ -1,7 +1,7 @@
 ---
 title: Service
 published: false
-visible: true
+visible: false
 aura:
     pagetype: website
 content:

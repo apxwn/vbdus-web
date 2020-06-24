@@ -1,8 +1,8 @@
 ---
 title: Verein
 published: false
-routable: true
-visible: true
+routable: false
+visible: false
 aura:
     pagetype: website
 content:
