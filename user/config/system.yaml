@@ -1,4 +1,4 @@
-absolute_urls: false
+absolute_urls: true
 timezone: null
 default_locale: null
 param_sep: ':'
