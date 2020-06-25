@@ -22,7 +22,8 @@
 					{% set untranslated_pages_behavior = grav.config.plugins.langswitcher.untranslated_pages_behavior %}
 					{% if untranslated_pages_behavior != 'none' %}
 						{% set translated_page = langswitcher.translated_pages[language] %}
-						{% if (not translated_page) or (not translated_page.published) %}
+						{% if ((not translated_page) or (not translated_page.published)) and (not page.taxonomy.codes) %}
+						{# durch and (not page.taxonomy.codes) werden die normalerweise nicht übersetzten mitglied.md-Seiten aus der Umleitung ausgeschlossen, diese gelten damit quasi als übersetzt #}
 							{% if untranslated_pages_behavior == 'redirect' %}
 								{% set lang_url = base_lang_url ~ '/' %}
 							{% elseif untranslated_pages_behavior == 'hide' %}
