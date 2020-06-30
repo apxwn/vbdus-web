@@ -21,12 +21,10 @@ languages:
     - ru
     - en
     - es
-    - pt
     - bg
     - cs
     - hu
     - pl
-    - ar
   default_lang: null
   include_default_lang: true
   pages_fallback_only: false
@@ -88,7 +86,7 @@ pages:
   vary_accept_encoding: false
   redirect_default_route: false
   redirect_default_code: '302'
-  redirect_trailing_slash: true
+  redirect_trailing_slash: false
   ignore_files:
     - .DS_Store
   ignore_folders:

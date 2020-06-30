@@ -8,7 +8,7 @@ search_content: rendered
 template: simplesearch_results
 filters: null
 filter_combinator: and
-ignore_accented_characters: true
+ignore_accented_characters: false
 order:
   by: date
   dir: desc
