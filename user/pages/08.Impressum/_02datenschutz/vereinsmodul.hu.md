@@ -1,5 +1,5 @@
 ---
-title: Magánélet
+title: Adatvédelem
 taxonomy:
     category:
         - service
